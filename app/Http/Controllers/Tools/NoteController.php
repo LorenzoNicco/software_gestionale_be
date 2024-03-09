@@ -12,6 +12,7 @@ use App\Http\Requests\Tools\UpdateNoteRequest;
 
 //Helpers
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -20,13 +21,17 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $allNotes = DB::table('notes')->get();
+        //Ricavo l'id dell'utente loggato
+        $loggedUserId = Auth::user()->id;
+
+        //Prendo tutte le note nella tabella del DB relative all'utente loggato
+        $allNotes = DB::table('notes')->where('user_id', $loggedUserId)->get();
 
         return response()->json([
             'success' => true,
             'code' => 200,
             'message' => 'Ok',
-            'notes' => $allNotes
+            'notes' => $allNotes,
         ]);
     }
 
