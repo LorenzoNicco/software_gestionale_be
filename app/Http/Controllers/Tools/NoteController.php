@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Tools;
 
+//Collegamento controller principale
 use App\Http\Controllers\Controller;
+
+//Note
 use App\Models\Tools\Note;
 use App\Http\Requests\Tools\StoreNoteRequest;
 use App\Http\Requests\Tools\UpdateNoteRequest;
+
+//Helpers
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -14,7 +20,14 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        $allNotes = DB::table('notes')->get();
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'message' => 'Ok',
+            'notes' => $allNotes
+        ]);
     }
 
     /**
