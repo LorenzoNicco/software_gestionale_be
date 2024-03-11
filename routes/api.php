@@ -21,7 +21,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::name('api.')->group(function () {
-    Route::resource('notes', NoteController::class)->only([
-        'index',
-    ]);
+    Route::resource('notes', NoteController::class);
 });

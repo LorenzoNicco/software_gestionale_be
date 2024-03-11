@@ -48,7 +48,16 @@ class NoteController extends Controller
      */
     public function store(StoreNoteRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $newNote = Note::create($data);
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'message' => 'Ok',
+            'notes' => $newNote,
+        ]);
     }
 
     /**
