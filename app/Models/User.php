@@ -8,9 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+//Collegamento model notes
+use App\Models\Tools\Note;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    //Definizione realzione con notes
+    public function notes(){
+        return $this->hasOne(Note::class);
+    }
 
     /**
      * The attributes that are mass assignable.
