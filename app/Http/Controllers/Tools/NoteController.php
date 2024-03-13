@@ -81,7 +81,16 @@ class NoteController extends Controller
      */
     public function update(UpdateNoteRequest $request, Note $note)
     {
-        //
+        $data = $request->validated();
+
+        $note->update($data);
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'message' => 'Ok',
+            'notes' => $note,
+        ]);
     }
 
     /**
