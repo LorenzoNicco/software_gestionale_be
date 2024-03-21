@@ -21,5 +21,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::name('api.')->group(function () {
+    Route::get('/notes/notesCounter', [NoteController::class, 'notesCounter']); //Rotta per il conteggio delle note
     Route::resource('notes', NoteController::class);
 });

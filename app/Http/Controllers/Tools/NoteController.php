@@ -107,4 +107,23 @@ class NoteController extends Controller
             'notes' => $note,
         ]);
     }
+
+    /**
+     * Mostra il numero di note associate all'utente
+     */
+    public function notesCounter()
+    {
+        //Ricavo l'id dell'utente loggato
+        $loggedUserId = Auth::user()->id;
+
+        //Prendo tutte le note nella tabella del DB relative all'utente loggato e le conto
+        $numberOfNotes = DB::table('notes')->where('user_id', $loggedUserId)->count();
+
+        return response()->json([
+            'success' => true,
+            'code' => 200,
+            'message' => 'Ok',
+            'notes' => $numberOfNotes,
+        ]);
+    }
 }
