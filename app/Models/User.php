@@ -10,14 +10,21 @@ use Laravel\Sanctum\HasApiTokens;
 
 //Collegamento model notes
 use App\Models\Tools\Note;
+//Collegamento model contacts
+use App\Models\Tools\Contact;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    //Definizione realzione con notes
+    //Definizione relazione con notes
     public function notes(){
-        return $this->hasOne(Note::class);
+        return $this->hasMany(Note::class);
+    }
+
+    //Definizione relazione con contacts
+    public function contacts(){
+        return $this->hasMany(Contact::class);
     }
 
     /**
